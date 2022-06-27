@@ -8,13 +8,13 @@ export function exit(code, maybe_message) {
     }
   })();
 
-	if (code === 0 && message !== null) {
-		console.log(`Quit: ${message}\n`);
-	} else if (code !== 0 && message !== null) {
-		console.log(`Abort (${code}): ${message}\n`);
-	} else if (code !== 0) {
-		console.log(`Abort (${code})\n`);
-	}
+  if (code === 0 && message !== null) {
+    console.log(`Quit: ${message}\n`);
+  } else if (code !== 0 && message !== null) {
+    console.log(`Abort (${code}): ${message}\n`);
+  } else if (code !== 0) {
+    console.log(`Abort (${code})\n`);
+  }
 
-	process.exit(code);
+  process.exit(code);
 }

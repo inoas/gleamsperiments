@@ -9,6 +9,6 @@ exit(Code, MaybeMessage) when is_integer(Code) ->
         {Code, {some, Message}} ->
             io:format("Abort (~p): ~p~n", [Code, Message]);
         {Code, none} ->
-            io:format("Code (~p)~n", [Code])
+            io:format("Abort (~p)~n", [Code])
     end,
     erlang:halt(Code).
