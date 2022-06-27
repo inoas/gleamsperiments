@@ -2,11 +2,13 @@
 
 -export([exit/2]).
 
-exit(Code, {some, Message}) ->
-	io:format("Exit message: ~p~n", [Message]),
-	io:format("Exit status code: ~p~n", [Code]),
-	erlang:exit(self(), Code);
-exit(Code, none) ->
-	io:format("Exit status code: ~p~n", [Code]),
-	erlang:exit(self(), Code)
-.
+exit(Code, MaybeMessage) when is_integer(Code) ->
+    case {Code, MaybeMessage} of
+        {0, {some, Message}} ->
+            io:format("Quit: ~p~n", [Message]);
+        {Code, {some, Message}} ->
+            io:format("Abort (~p): ~p~n", [Code, Message]);
+        {Code, none} ->
+            io:format("Code (~p)~n", [Code])
+    end,
+    erlang:halt(Code).

@@ -8,23 +8,33 @@ pub type Option(a) {
 pub fn main() {
   io.println("Running module diedie!")
 
-  case True {
-    True -> quit(None)
-    False -> abort(Some("This should never Run"))
+  case False {
+    // _ -> exit(99, None)
+    True -> quit(Some("This quits!"))
+    False -> abort(Some("This aborts!"))
   }
 
-  io.println("This should not output!")
+  io.println("This should be never printed!")
 }
 
-fn quit(maybe_message: Option(String)) -> Nil {
+pub fn quit(maybe_message: Option(String)) -> Nil {
   do_exit(0, maybe_message)
 }
 
-fn abort(maybe_message: Option(String)) -> Nil {
+pub fn abort(maybe_message: Option(String)) -> Nil {
   do_exit(1, maybe_message)
+}
+
+pub fn exit(exit_code: Int, maybe_message: Option(String)) -> Nil {
+  do_exit(exit_code, maybe_message)
 }
 
 if erlang {
   external fn do_exit(code: Int, maybe_message: Option(String)) -> Nil =
     "diedie_ffi" "exit"
+}
+
+if javascript {
+  external fn do_exit(code: Int, maybe_message: Option(String)) -> Nil =
+    "./diedie_ffi.mjs" "exit"
 }
