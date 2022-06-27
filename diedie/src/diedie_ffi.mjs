@@ -2,9 +2,9 @@ export function exit(code, maybe_message) {
   let message = (function () {
     switch (maybe_message.constructor.name) {
       case "Some":
-        return maybe_message["0"]
+        return maybe_message["0"];
       case "None":
-        return null
+        return null;
     }
   })();
 
