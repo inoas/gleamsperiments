@@ -7,11 +7,11 @@ import gleam/option.{None, Option, Some}
 pub fn exit(code: Int, maybe_message: Option(String)) {
   let code_string = int.to_string(code)
   case code, maybe_message {
-    0, Some(message) ->
-      io.println(string.concat(["Quit (", code_string, "): ", message]))
+    0, Some(message) -> io.println(string.concat(["Quit: ", message]))
     code, Some(message) if code >= 1 ->
       io.println(string.concat(["Abort (", code_string, "): ", message]))
     code, None if code >= 1 -> io.println("Abort")
+    _, _ -> Nil
   }
   // system.exit(code)
 }
